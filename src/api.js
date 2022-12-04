@@ -1,6 +1,5 @@
 const express = require("express");
 const serverless = require("serverless-http");
-const axios = require("axios");
 const { Configuration, OpenAIApi } = require("openai");
 
 const configuration = new Configuration({
@@ -15,7 +14,7 @@ router.get("/", async (req, res) => {
   const response = await openai.listModels();
 
   res.json({
-    hello: "is this thing even working",
+    hello: response,
   });
 });
 
