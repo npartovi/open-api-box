@@ -1,6 +1,7 @@
 const express = require("express");
 const serverless = require("serverless-http");
 const { Configuration, OpenAIApi } = require("openai");
+const { faker } = require("@faker-js/faker");
 
 const configuration = new Configuration({
   apiKey: "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",
@@ -10,17 +11,18 @@ const app = express();
 const router = express.Router();
 
 router.get("/", async (req, res) => {
+  const prompt = `Tell me my cause of death involving a ${faker.animal.insect()} and a ${faker.random.word()}`;
   const openai = new OpenAIApi(configuration);
   const response = await openai.createCompletion({
     model: "text-davinci-003",
-    prompt: "Tell me a joke about a cop and a jewish man in a bowling alley",
+    prompt,
     max_tokens: 64,
-    temperature: 0.4,
+    temperature: 0,
   });
 
   res.json({
-    response: "hello",
-    data: response.data,
+    prompt,
+    response: response.data.choices[0].text,
   });
 });
 
