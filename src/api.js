@@ -5,7 +5,7 @@ const { faker } = require("@faker-js/faker");
 const { textGenerator } = require("./lib/text-generator");
 
 const configuration = new Configuration({
-  apiKey: "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",
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 const app = express();
