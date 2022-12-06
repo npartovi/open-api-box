@@ -1,5 +1,5 @@
 const { faker } = require("@faker-js/faker");
-const fetch = require("node-fetch");
+const axios = require("axios").default;
 
 const SF_CHARACTERS = [
   "Adon",
@@ -126,6 +126,10 @@ export const textGenerator = () => {
 };
 
 export const getRandomChuckNorrisJoke = async () => {
-  const res = await fetch("https://api.chucknorris.io/jokes/random");
-  return res.json();
+  try {
+    const res = await axios.get("https://api.chucknorris.io/jokes/random");
+    return res.data.value;
+  } catch (e) {
+    return "oops there was an error getting your chuck norris joke";
+  }
 };
