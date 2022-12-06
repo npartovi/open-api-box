@@ -1,8 +1,11 @@
 const express = require("express");
 const serverless = require("serverless-http");
 const { Configuration, OpenAIApi } = require("openai");
-const { faker } = require("@faker-js/faker");
-const { textGenerator } = require("./lib/text-generator");
+const {
+  textGenerator,
+  getRandomSFCharacter,
+  getRandomChuckNorrisJoke,
+} = require("./lib/text-generator.js");
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -14,21 +17,25 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   const listOfQueries = textGenerator();
   const openai = new OpenAIApi(configuration);
-  const response = {};
+  const chuckNorris = await getRandomChuckNorrisJoke();
+  const response = {
+    sfCharacter: getRandomSFCharacter(),
+    chuckNorris,
+  };
 
-  for (const prompt of listOfQueries) {
-    const res = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt,
-      max_tokens: 64,
-      temperature: 0,
-    });
+  // for (const prompt of listOfQueries) {
+  //   const res = await openai.createCompletion({
+  //     model: "text-davinci-003",
+  //     prompt,
+  //     max_tokens: 64,
+  //     temperature: 0,
+  //   });
 
-    response[res.data.id] = {
-      question: prompt,
-      answer: res.data.choices[0].text,
-    };
-  }
+  //   response[res.data.id] = {
+  //     question: prompt,
+  //     answer: res.data.choices[0].text,
+  //   };
+  // }
 
   res.json({
     response,
