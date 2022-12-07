@@ -23,6 +23,8 @@ router.get("/", async (req, res) => {
     chuckNorris,
   };
 
+  console.log(process.env.OPENAI_API_KEY);
+
   // for (const prompt of listOfQueries) {
   //   const res = await openai.createCompletion({
   //     model: "text-davinci-003",
