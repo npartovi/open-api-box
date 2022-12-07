@@ -23,19 +23,21 @@ router.get("/", async (req, res) => {
     chuckNorris,
   };
 
-  // for (const prompt of listOfQueries) {
-  //   const res = await openai.createCompletion({
-  //     model: "text-davinci-003",
-  //     prompt,
-  //     max_tokens: 64,
-  //     temperature: 0,
-  //   });
+  console.log(process.env.OPENAI_API_KEY);
 
-  //   response[res.data.id] = {
-  //     question: prompt,
-  //     answer: res.data.choices[0].text,
-  //   };
-  // }
+  for (const prompt of listOfQueries) {
+    const res = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt,
+      max_tokens: 64,
+      temperature: 0,
+    });
+
+    response[res.data.id] = {
+      question: prompt,
+      answer: res.data.choices[0].text,
+    };
+  }
 
   res.json({
     response,

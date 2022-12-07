@@ -5,7 +5,7 @@
   publish = "dist"
 
 [build.environment]
-  OPENAI_API_KEY = "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"
+  OPENAI_API_KEY = "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"
   
 
 
