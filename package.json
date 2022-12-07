@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/owenconti/netlify-express#readme",
   "devDependencies": {
-    "@faker-js/faker": "^7.6.0"
+    "@faker-js/faker": "^7.6.0",
+    "netlify-cli": "^12.2.9"
   }
 }
