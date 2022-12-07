@@ -1,5 +1,8 @@
 [build]
   functions = "functions"
+  environment = {
+    OPENAI_API_KEY = "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",
+  }
 
 [dev]
   publish = "dist"

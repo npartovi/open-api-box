@@ -128,6 +128,7 @@ export const textGenerator = () => {
 export const getRandomChuckNorrisJoke = async () => {
   try {
     const res = await axios.get("https://api.chucknorris.io/jokes/random");
+    console.log("response", res);
     return res.data.value;
   } catch (e) {
     return "oops there was an error getting your chuck norris joke";
